@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tyler RT Dev - Terminal</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas class="binary-rain" id="binaryRain"></canvas>
+    
+    <div class="container">
+        <div class="terminal-window">
+            <div class="scan-line"></div>
+            
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <div class="control-btn control-close"></div>
+                    <div class="control-btn control-minimize"></div>
+                    <div class="control-btn control-maximize"></div>
+                </div>
+                <div class="terminal-title">theroad@dev-machine: ~/links</div>
+            </div>
+            
+            <div class="terminal-content">
+                <div class="header-section">
+                    <div class="command-line">
+                        <span class="prompt">theroad@dev-machine:~/profile$</span> 
+                        <span class="command">cat developer_profile.txt</span>
+                        <pre class="ascii-art-welcome">
+ __      __          ___                                        
+/\ \  __/\ \        /\_ \                                       
+\ \ \/\ \ \ \     __\//\ \     ___    ___     ___ ___      __   
+ \ \ \ \ \ \ \  /'__`\\ \ \   /'___\ / __`\ /' __` __`\  /'__`\ 
+  \ \ \_/ \_\ \/\  __/ \_\ \_/\ \__//\ \L\ \/\ \/\ \/\ \/\  __/ 
+   \ `\___x___/\ \____\/\____\ \____\ \____/\ \_\ \_\ \_\ \____\
+    '\/__//__/  \/____/\/____/\/____/\/___/  \/_/\/_/\/_/\/____/
+                                                                
+                                                                
+                        </pre>
+
+                        <div class="image-container">
+                            <img src="./resources/images/image.png" alt="Profile Image">
+                        </div>
+                        <!-- <pre class="ascii-art">
+T  y  l  e  r  R  T  D  e  v
+                        </pre> -->
+                    </div>
+
+                    <div class="user-info">
+                        <div class="output"><span class="highlight-yellow">Name:</span> <span class="highlight-green">TylerRTDev</span></div>
+                        <div class="output"><span class="highlight-yellow">Role:</span> Developer </div>
+                        <div class="output"><span class="highlight-yellow">Stack:</span> HTML/CSS | JavaScript | Python </div>
+                        <div class="output"><span class="highlight-yellow">Status:</span> Unavailable | <span class="highlight-green">[ Available ]</span></div>
+                        <div class="output"><span class="highlight-yellow">Location:</span> London, England </div>
+                        <div class="user-info">
+                        <div class="output"><span class="highlight-yellow">Info:</span> <span class="highlight-green"> Freelance Web Developer turning ideas into deployable realities. From concept to code, no idea is too small—let’s build something awesome. </span></div>
+                    </div>
+                    </div>
+
+                    
+                </div>
+                
+                <div class="command-line">
+                    <span class="prompt">theroad@dev-machine:~/profile$</span> 
+                    <span class="command">cd links/</span>
+                </div>
+
+                <div class="command-line">
+                    <span class="prompt">theroad@dev-machine:~/links$</span> 
+                    <span class="command">ls -la social_links/</span>
+                </div>
+
+                <div class="links-section">
+                    <a href="https://tylerrt.dev" class="link-item" target="_blank" rel="noopener noreferrer">
+                        <span class="link-prefix">></span>
+                        <div class="link-text">
+                            <span class="link-name">portfolio.html</span>
+                            <span class="link-url">Featured projects</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://x.com/TylerRTDev" class="link-item" target="_blank" rel="noopener noreferrer">
+                        <span class="link-prefix">></span>
+                        <div class="link-text">
+                            <span class="link-name">x_twitter.sh</span>
+                            <span class="link-url">@TylerRTDev</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://instagram.com/tylerrtdev" class="link-item" target="_blank" rel="noopener noreferrer">
+                        <span class="link-prefix">></span>
+                        <div class="link-text">
+                            <span class="link-name">instagram.py</span>
+                            <span class="link-url">@tylerrtdev</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://github.com/tylerrtdev" class="link-item" target="_blank" rel="noopener noreferrer">
+                        <span class="link-prefix">></span>
+                        <div class="link-text">
+                            <span class="link-name">github.git</span>
+                            <span class="link-url">Code Repositories</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/tyler-kerr-ctfl" class="link-item" target="_blank" rel="noopener noreferrer">
+                        <span class="link-prefix">></span>
+                        <div class="link-text">
+                            <span class="link-name">linkedin.exe</span>
+                            <span class="link-url">Professional network</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+
+                    <a href="mailto:tylerrtdevx@gmail.com" class="link-item">
+                        <span class="link-prefix">></span>
+                        <div class="link-text">
+                            <span class="link-name">contact.mail</span>
+                            <span class="link-url">Let's build something</span>
+                        </div>
+                        <span class="link-arrow">→</span>
+                    </a>
+                </div>
+
+                <div class="command-line" style="margin-top: 25px;">
+                    <span class="prompt">theroad@dev-machine:~/links$</span> 
+                    <span class="command">echo "Thanks for visiting<span class="loading-dots"></span>"</span>
+                </div>
+                
+                <div class="output" style="margin-top: 10px;">
+                    <span class="highlight-green">Thanks for visiting!</span>
+                </div>
+
+                <div class="command-line" style="margin-top: 15px;">
+                    <span class="prompt">theroad@dev-machine:~/links$</span> 
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+
+            <div class="status-bar">
+                <div class="status-left">
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <span>ONLINE</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <span>SSH CONNECTED</span>
+                    </div>
+                </div>
+                <div class="status-right">
+                    <span class="highlight-cyan">theroad@dev-machine</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
