@@ -3,7 +3,8 @@
 This is a custom-built **digital business card**: [rtdev-profiles.netlify.app](https://rtdev-profiles.netlify.app/)  
 Designed it to be fully responsive, so it looks great on mobile, tablet, and desktop. It's the central place to showcase my social links, work, and online presence.
 
-The goal was to create something truly personal that aligns with personal brand.
+The goal was to create something truly personal that aligns with my online presence and varied aspects of things I find interesting. 
+For example: The falling 1's and 0's in the background were based on the movie The Matrix's iconic falling code.
 
 #### Mobile
 ![Galaxy S21-1749156267550](https://github.com/user-attachments/assets/aebca4d1-0e54-4146-8563-0b0706f3e00c)
