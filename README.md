@@ -1,7 +1,7 @@
 ### 🌐 About This Project
 
 This is a custom-built **digital business card**: [rtdev-profiles.netlify.app](https://rtdev-profiles.netlify.app/)  
-Designed it to be fully responsive, so it looks great on mobile, tablet, and desktop. It's central place to showcase my social links, work, and online presence.
+Designed it to be fully responsive, so it looks great on mobile, tablet, and desktop. It's the central place to showcase my social links, work, and online presence.
 
 The goal was to create something truly personal that aligns with personal brand.
 
