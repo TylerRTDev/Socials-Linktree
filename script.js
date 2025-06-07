@@ -15,7 +15,7 @@ const particles = [];
 let maxParticles = 250;
 
 if (window.innerWidth < 800) {
-    maxParticles = 50;
+    maxParticles = 120;
 } else if (window.innerWidth < 1200) {
     maxParticles;
 }
@@ -43,6 +43,13 @@ class BinaryParticle {
         this.scalePhase = Math.random() * Math.PI * 2;
         this.baseScale = 0.8 + Math.random() * 0.4;
         this.time = 0;
+
+        if (window.innerWidth < 800) {
+            this.fontSize = 24 + Math.random() * 12;
+            this.breatheRadius = 60 + Math.random() * 30;
+            this.hoverRadius = 5 + Math.random() * 10;
+            this.baseScale = 0.6 + Math.random() * 0.3;
+        }
     }
 
     update() {
