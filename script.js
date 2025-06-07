@@ -1,98 +1,133 @@
-// Binary rain effect
+// Paste full JavaScript from canvas
+
 const canvas = document.getElementById('binaryRain');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
 
-const binary = "01";
+const binary = "010";
 const binaryChars = binary.split("");
+const particles = [];
+let maxParticles = 250;
 
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
-
-for(let x = 0; x < columns; x++) {
-    drops[x] = Math.random() * canvas.height / fontSize;
+if (window.innerWidth < 800) {
+    maxParticles = 50;
+} else if (window.innerWidth < 1200) {
+    maxParticles;
 }
 
-function drawBinary() {
-    ctx.fillStyle = 'rgba(10, 14, 26, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = '#00ff41';
-    ctx.font = fontSize + 'px JetBrains Mono';
-    
-    for(let i = 0; i < drops.length; i++) {
-        const text = binaryChars[Math.floor(Math.random() * binaryChars.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        
-        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
+class BinaryParticle {
+    constructor() {
+        this.baseX = Math.random() * canvas.width;
+        this.baseY = Math.random() * canvas.height;
+        this.x = this.baseX;
+        this.y = this.baseY;
+        this.char = binaryChars[Math.floor(Math.random() * binaryChars.length)];
+        const fonts = ['JetBrains Mono', 'Goldman', 'Zen Dots', 'Press Start 2P'];
+        this.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+        this.fontSize = 36 + Math.random() * 16;
+        this.opacity = 0.3 + Math.random() * 0.5;
+        this.baseOpacity = this.opacity;
+        this.breatheSpeed = 0.004 + Math.random() * 0.01;
+        this.breatheRadius = 90 + Math.random() * 50;
+        this.hoverSpeed = 0.005 + Math.random() * 0.01;
+        this.hoverRadius = 8 + Math.random() * 15;
+        this.breathePhase = Math.random() * Math.PI * 2;
+        this.hoverPhaseX = Math.random() * Math.PI * 2;
+        this.hoverPhaseY = Math.random() * Math.PI * 2;
+        this.scaleSpeed = 0.008 + Math.random() * 0.012;
+        this.scalePhase = Math.random() * Math.PI * 2;
+        this.baseScale = 0.8 + Math.random() * 0.4;
+        this.time = 0;
+    }
+
+    update() {
+        this.time += 0.05;
+        const breatheOffset = Math.sin(this.time * this.breatheSpeed + this.breathePhase) * this.breatheRadius;
+        const hoverX = Math.sin(this.time * this.hoverSpeed + this.hoverPhaseX) * (this.hoverRadius * 2.5);
+        const hoverY = Math.cos(this.time * this.hoverSpeed * 0.7 + this.hoverPhaseY) * (this.hoverRadius * 0.6);
+        this.x = this.baseX + hoverX;
+        this.y = this.baseY + breatheOffset + hoverY;
+        const opacityPulse = Math.sin(this.time * this.breatheSpeed * 1.5 + this.breathePhase) * 0.2;
+        this.opacity = this.baseOpacity + opacityPulse;
+        const scalePulse = Math.sin(this.time * this.scaleSpeed + this.scalePhase) * 0.3;
+        this.scale = this.baseScale + scalePulse;
+
+        if (Math.random() < 0.002) {
+            this.char = binaryChars[Math.floor(Math.random() * binaryChars.length)];
         }
-        drops[i]++;
+
+        if (this.baseX < -50 || this.baseX > canvas.width + 50) {
+            this.baseX = Math.random() * canvas.width;
+        }
+        if (this.baseY < -50 || this.baseY > canvas.height + 50) {
+            this.baseY = Math.random() * canvas.height;
+        }
+    }
+
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0.1, Math.min(1, this.opacity));
+        ctx.fillStyle = '#00ff41';
+        ctx.translate(this.x, this.y);
+        ctx.scale(this.scale, this.scale);
+        ctx.translate(-this.x, -this.y);
+        ctx.font = this.fontSize + 'px ' + this.fontFamily + ', monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.char, this.x, this.y);
+        ctx.restore();
     }
 }
 
-setInterval(drawBinary, 100);
+function initParticles() {
+    particles.length = 0;
+    for (let i = 0; i < maxParticles; i++) {
+        particles.push(new BinaryParticle());
+    }
+}
+initParticles();
 
-// Resize handler
+function drawHoveringBinary() {
+    ctx.fillStyle = 'rgba(10, 14, 26, 0.03)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+}
+
+function animate() {
+    drawHoveringBinary();
+    requestAnimationFrame(animate);
+}
+animate();
+
 window.addEventListener('resize', function() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    resizeCanvas();
+    initParticles();
 });
 
-// Add typing effect to command lines
-document.addEventListener('DOMContentLoaded', function() {
-    const commandLines = document.querySelectorAll('.command-line');
-    commandLines.forEach((line, index) => {
-        line.style.opacity = '0';
-        setTimeout(() => {
-            line.style.opacity = '1';
-            line.style.animation = 'typewriter 0.8s steps(40, end)';
-        }, index * 200);
-    });
-
-    // Animate links
-    const links = document.querySelectorAll('.link-item');
-    links.forEach((link, index) => {
-        link.style.opacity = '0';
-        link.style.transform = 'translateX(-20px)';
-        setTimeout(() => {
-            link.style.transition = 'all 0.5s ease';
-            link.style.opacity = '1';
-            link.style.transform = 'translateX(0)';
-        }, 1000 + index * 100);
-    });
-});
-
-// Click tracking
-document.querySelectorAll('.link-item').forEach(link => {
-    link.addEventListener('click', function(e) {
-        const linkName = this.querySelector('.link-name').textContent;
-        console.log(`Executing: ${linkName}`);
-        
-        // Add terminal feedback
-        const terminal = document.querySelector('.terminal-content');
-        const feedback = document.createElement('div');
-        feedback.className = 'output';
-        feedback.innerHTML = `<span class="highlight-green">Launching ${linkName}...</span>`;
-        feedback.style.opacity = '0';
-        terminal.appendChild(feedback);
-        
-        setTimeout(() => {
-            feedback.style.transition = 'opacity 0.3s';
-            feedback.style.opacity = '1';
-        }, 10);
-    });
-});
-
-// Add glitch effect occasionally
 setInterval(() => {
-    if (Math.random() < 0.1) {
-        document.body.style.filter = 'hue-rotate(10deg)';
+    if (Math.random() < 0.05) {
+        document.body.style.filter = 'hue-rotate(5deg)';
         setTimeout(() => {
             document.body.style.filter = 'none';
         }, 50);
     }
-}, 5000);
+}, 8000);
+
+document.addEventListener('DOMContentLoaded', function() {
+    const terminal = document.querySelector('.terminal-window');
+    terminal.style.opacity = '0';
+    terminal.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+        terminal.style.transition = 'all 1s ease';
+        terminal.style.opacity = '1';
+        terminal.style.transform = 'translateY(0)';
+    }, 500);
+});
